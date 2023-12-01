@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+  {% load static %}
+  <head>
+    <meta charset="UTF-8" />
+    <title>Result</title>
+    <link rel="stylesheet" href="app.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <!--navbar starts-->
+    <div class="nav">
+      <div class="title">CompareAdda</div>
+      <div class="options">
+        <div class="links">
+          <a href="#">HOME</a>
+        </div>
+        <div class="links">
+          <a href="#">CONTACT</a>
+        </div>
+        <div class="links">
+          <a href="#">ABOUT US</a>
+        </div>
+      </div>
+    </div>
+    <!--navbar ends-->
+
+    <!--Alerts start-->
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+      <strong>Cheers!</strong>
+      Here is what we have found.
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="alert"
+        aria-label="Close"
+      ></button>
+    </div>
+    <!--Alerts ends-->
+
+    <div class="inputs">
+      <div class="container">
+        <img src="{% static 'pricee/amazon.jpg' %}" class="imgs" />
+        <br />
+        <br />
+        <select
+          id="amazon"
+          class="form-select"
+          onchange="change_values('amazon')"
+          aria-label="Default select example"
+        >
+          <option selected value="0">{{amazon_price.0.0}}</option>
+          {% for i in amazon_price|slice:"1:" %}
+          <option value="{{forloop.counter}}">{{ i.0 }}</option>
+          {% endfor %}
+        </select>
+
+        <p id="amazon_price">{{amazon_price.0.1}}</p>
+        <p id="amazon_reviews">{{amazon_price.0.3}}</p>
+        <a
+          class="btn btn-info"
+          href="{{amazon_price.0.2}}"
+          id="amazon_link"
+          target="_blank"
+          role="button"
+        >
+          Visit Amazon
+        </a>
+        <br />
+        <br />
+        <br />
+        <img src="{% static 'pricee/flipkart.png' %}" class="imgs" />
+        <br />
+        <br />
+        <select
+          id="flipkart"
+          onchange="change_values('flipkart')"
+          class="form-select"
+          aria-label="Default select example"
+        >
+          <option selected value="0">{{flipkart_price.0.0}}</option>
+          {% for i in flipkart_price|slice:"1:" %}
+          <option value="{{forloop.counter}}">{{i.0}}</option>
+          {% endfor %}
+        </select>
+
+        <p id="flipkart_price">{{flipkart_price.0.1}}</p>
+        <a
+          class="btn btn-warning"
+          href="{{flipkart_price.0.2}}"
+          id="flipkart_link"
+          target="_blank"
+          role="button"
+        >
+          Visit Flipkart
+        </a>
+        <br />
+        <br />
+        <br />
+        <img src="{% static 'pricee/shopclues.png' %}" class="imgs" />
+        <br />
+        <br />
+        <select
+          id="sclues"
+          class="form-select"
+          aria-label="Default select example"
+          onchange="change_values('sclues')"
+        >
+          <option selected value="0">{{sclues_price.0.0}}</option>
+          {% for i in sclues_price|slice:"1:" %}
+          <option value="{{forloop.counter}}">{{i.0}}</option>
+          {% endfor %}
+        </select>
+
+        <p id="sclues_price">{{sclues_price.0.1}}</p>
+        <a
+          class="btn btn-primary"
+          href="{{sclues_price.0.2}}"
+          id="sclues_link"
+          target="_blank"
+          role="button"
+        >
+          Visit Shopclues
+        </a>
+      </div>
+    </div>
+    <div class="footer">
+      <div class="copyright">
+        {% load static %}
+        <img src="{% static 'pricee/copyright.png' %}" class="copyrightimg" />
+      </div>
+    </div>
+
+    <script>
+      var sclues_price = {{ sclues_price | safe }}
+      var amazon_price = {{ amazon_price | safe }}
+      var flipkart_price = {{ flipkart_price | safe }}
+      console.log(amazon_price)
+      function change_values(id){
+
+        var select = document.getElementById(id);
+        var value = select.options[select.selectedIndex].value;
+        var price = 0
+        var reviews= ""
+        var link = "#"
+        console.log(value)
+        if( id == "amazon" ){
+          price = amazon_price[value][1]
+          link = amazon_price[value][2]
+          reviews= amazon_price[value][3]
+        }
+        else if(id == "flipkart"){
+          price = flipkart_price[value][1]
+          link = flipkart_price[value][2]
+         }
+         else{
+          price = sclues_price[value][1]
+          link = sclues_price[value][2]
+         }
+
+
+        document.getElementById( id+"_price" ).innerHTML = price
+        document.getElementById( id+"_link" ).setAttribute("href",link)
+        document.getElementById( id+"_reviews" ).innerHTML= reviews
+       }
+    </script>
+  </body>
+
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+      font-family: 'Source Sans Pro', sans-serif;
+    }
+
+    .nav {
+      background-color: black;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      align-items: center;
+      height: 10vh;
+      color: white;
+    }
+
+    .title {
+      font-size: 2rem;
+    }
+
+    .options {
+      display: flex;
+      flex-direction: row;
+      gap: 15px;
+      height: 10vh;
+      width: 20%;
+      justify-content: space-around;
+      align-items: center;
+      font-size: 1.1rem;
+    }
+
+    a {
+      text-decoration: none;
+      color: white;
+    }
+
+    .options :hover {
+      color: yellow;
+    }
+
+    .inputs {
+      background-image: linear-gradient(white, white);
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .amazon {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      height: 10rem;
+      width: 50%;
+    }
+
+    .flipkart {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      height: 7rem;
+      width: 50%;
+    }
+
+    .imgs {
+      height: 3rem;
+    }
+
+    .imgsx {
+      height: 11rem;
+    }
+
+    .shopclues {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      height: 7rem;
+      width: 50%;
+    }
+
+    .userinput {
+      border-radius: 8px;
+      width: 20%;
+      height: 5%;
+      border: 3px solid black;
+    }
+
+    .footer {
+      background-color: black;
+      height: 10vh;
+    }
+
+    .copyright {
+      width: 15%;
+      height: 10vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .copyrightimg {
+      height: 4vh;
+    }
+  </style>
+</html>

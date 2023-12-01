@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TEAM API</title>
+  <link rel="stylesheet" href="app.css">
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap" rel="stylesheet">
+
+</head>
+	<div class = "nav">
+		<div class = "title">CompareAdda</div>
+		<div class = "options">
+			<div class = "links">
+				<a href = "#">HOME</a>
+			</div>
+			<div class = "links">
+				<a href = "#">CONTACT</a>
+			</div>
+			<div class = "links">
+				<a href = "#">ABOUT US</a>
+			</div>
+		</div>
+	</div>
+	<div class = "inputs">
+
+		<div class = "amazon">
+				<h1>SEARCH ON </h1>
+				<img src = "{% static 'pricee/amazon.png' %}" class = "imgs">
+			<input type = "text" class = "userinput"> </input>
+		</div>
+		<div class = "flipkart">
+			<h1> SEARCH ON  </h1>
+			<img src = "{% static 'pricee/flipkart.png' %}" class = "imgs">
+			<input type = "text" class = "userinput"> </input>
+		</div>
+		<div class = "shopclues">
+			<h1> SEARCH ON </h1>
+			<img src = "{% static 'pricee/shopclues.png' %}">
+			<input type ="text" class = "userinput"> </input>
+		</div>
+	</div>
+	<div class = "footer">
+		<div class = "copyright">
+			{% load static %}
+			<img src = "{% static 'pricee/copyright.png' %}" class = "copyrightimg">
+		</div>
+	</div>
+    <style>
+        	*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+.nav{
+  background-color: skyblue;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  height: 10vh;
+  color: white;
+}
+
+.title{
+  font-size: 2rem;
+}
+
+.options{
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  height: 10vh;
+  width: 20%;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 1.1rem;
+}
+
+a{
+  text-decoration: none;
+  color: white;
+}
+
+
+.options :hover{
+  color: yellow;
+}
+
+.inputs{
+  background-image: linear-gradient(white, white);
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+.amazon{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 7rem;
+  width: 50%;
+}
+
+.flipkart{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 7rem;
+  width: 50%;
+}
+
+.imgs{
+  height: 3rem;
+}
+
+.shopclues{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 7rem;
+  width: 50%;
+}
+
+.userinput{
+
+  border-radius: 8px;
+  width: 30%;
+  height: 30%;
+  border: 3px solid black;
+}
+
+.footer{
+  background-color: skyblue;
+  height: 10vh;
+}
+
+.copyright{
+  width: 15%;
+  height: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.copyrightimg{
+  height: 4vh;
+}
+    </style>
+<body>
+
+</body>
+
+</html>
